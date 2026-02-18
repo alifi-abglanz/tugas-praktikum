@@ -1,0 +1,174 @@
+@charset "utf-8";
+
+  * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4; 
+            color: #4a4a4a;
+        }
+
+
+        nav {
+            background-color: #333333; /* Abu Gelap */
+            padding: 20px;
+            text-align: center;
+            position: sticky; 
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .nav-title {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #ffffff; /* Teks Putih */
+            text-transform: uppercase;
+        }
+
+
+        .hero {
+            background-image: url('./assets/assets/background.jpg'); 
+            background-size: cover;    
+            background-position: center; 
+            height: 60vh;            
+            display: flex;
+            align-items: center;       
+            justify-content: center;   
+            text-align: center;
+            position: relative;         
+            margin-bottom: 50px;
+            color: white;
+        }
+
+        /* Overlay Hitam Transparan agar teks terbaca */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.5); /* Hitam transparansi 50% */
+        }
+
+        .hero-content {
+            position: relative; 
+            z-index: 1;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* Tombol CTA (Call to Action) */
+        .btn-main {
+            padding: 12px 30px;
+            background-color: #080808;
+            color: #cdcccc;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 10px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 14px;
+            margin-top: 20px;
+            
+        }
+
+        .btn-main:hover {
+            background-color: #333;
+            color: #edebeb;
+        }
+
+        /* --- 4. CONTAINER & GRID --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Center jika item kurang dari 3 */
+            gap: 30px;
+        }
+
+        /* --- 5. STYLING CARD --- */
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            flex: 1 1 300px; /* Fleksibel, minimal lebar 300px */
+            max-width: 380px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: 300px; 
+            object-fit: cover;
+            /* Saya hapus filter grayscale agar produk terlihat menarik */
+        }
+
+        .card-body {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .card-desc {
+            color: #777;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .card h3 {
+            color: #333;
+            margin-top: auto; /* Dorong harga ke bawah */
+        }
+
+        /* --- 6. FOOTER (MODIFIKASI: WARNA ABU GELAP) --- */
+        footer {
+            background-color: #333333; /* Abu Gelap */
+            color: #cfcfcf; /* Teks abu terang */
+            text-align: center;
+            padding: 30px 30px;
+            margin-top: 100px;
+        }
+        
+        footer p {
+            margin: 5px 0;
+        }

@@ -1,29 +1,10 @@
-<?php
-session_start();
-
-if (!isset($_SESSION['username']) && isset($_COOKIE['remember_user'], $_COOKIE['remember_key'])) {
-    $cookieUser = $_COOKIE['remember_user'];
-    $cookieKey = $_COOKIE['remember_key'];
-
-    if (hash('sha256', $cookieUser) === $cookieKey) {
-        $_SESSION['username'] = $cookieUser;
-    }
-}
-
-if (!isset($_SESSION['username'])) {
-    header('Location: proses_login.php');
-    exit;
-}
-
-$username = $_SESSION['username'];
-?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cibaduyut Shoes</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
 
@@ -35,12 +16,12 @@ $username = $_SESSION['username'];
         </div>
 
         <div style="margin : 10px ; display:flex; align-items:center; gap: 20px; color:#fff;">
-            <span>Halo, <strong><?= htmlspecialchars($username) ?></strong></span>
-            <a href="logout.php" class="btn-outline-light btn-sm">Logout</a>
+            <span>Halo, <strong>{{ session('user') }}</strong></span>
+            <a href="{{ route('logout') }}" class="btn-outline-light btn-sm">Logout</a>
         </div>
     </nav>
 
-    <section class="hero">
+    <section class="hero" style="height: 35vh; margin-bottom: 32px; background-image: url('{{ asset('assets/background.jpg') }}'); background-size: cover; background-position: center;">
         <div class="hero-content">
             <h1>Koleksi Premium</h1>
             <p>Tiga pilihan terbaik untuk gaya Anda hari ini.</p>
@@ -49,9 +30,9 @@ $username = $_SESSION['username'];
 
     <div class="container">
         <div class="product-grid">
-            
+
             <div class="card">
-                <img src="./assets/assets/AIR_FORCE_1.jpg" alt="Sepatu 1">
+                <img src="{{ asset('assets/AIR_FORCE_1.jpg') }}" alt="Sepatu 1">
                 <div class="card-body">
                     <div>
                         <div class="card-title">Urban Grey Sneakers</div>
@@ -64,7 +45,7 @@ $username = $_SESSION['username'];
             </div>
 
             <div class="card">
-                <img src="./assets/assets/AIR_JORDAN_1_LOW.jpg" alt="Sepatu 2">
+                <img src="{{ asset('assets/AIR_JORDAN_1_LOW.jpg') }}" alt="Sepatu 2">
                 <div class="card-body">
                     <div>
                         <div class="card-title">Classic White Trainer</div>
@@ -77,7 +58,7 @@ $username = $_SESSION['username'];
             </div>
 
             <div class="card">
-                <img src="./assets/assets/NIKE_P_6000.jpg" alt="Sepatu 3">
+                <img src="{{ asset('assets/NIKE_P_6000.jpg') }}" alt="Sepatu 3">
                 <div class="card-body">
                     <div>
                         <div class="card-title">Monochrome Runner</div>
@@ -85,7 +66,7 @@ $username = $_SESSION['username'];
                         <p class="stok-text">Stok: 6</p>
                     </div>
                     <h3>IDR 700.000</h3>
-                    
+
                     <a href="#" class="btn-main">Belanja Sekarang</a>
                 </div>
             </div>
@@ -96,6 +77,6 @@ $username = $_SESSION['username'];
     <footer>
         <p>&copy; 2024 Cibaduyut Shoes.</p>
     </footer>
-    <script src="script.js"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>

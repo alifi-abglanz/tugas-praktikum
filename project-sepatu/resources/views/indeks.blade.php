@@ -29,6 +29,11 @@
     </section>
 
     <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; gap: 16px; flex-wrap: wrap;">
+            <h2 style="margin: 0;">Daftar Sepatu</h2>
+            <a href="{{ route('products') }}" class="btn-outline-light btn-sm">Lihat Semua Produk >>></a>
+        </div>
+
         <div class="product-grid">
 
             <div class="card">

@@ -23,18 +23,26 @@
                     Mode Gelap
                 </button>
 
-                <?php if(session()->has('user')): ?>
+                <?php if(auth()->guard()->check()): ?>
                     <span class="text-white me-3">
-                        <?php echo e(session('user')); ?>
+                        <?php echo e(Auth::user()->name); ?>
 
                     </span>
 
-                    <a href="<?php echo e(route('logout')); ?>" class="btn btn-danger btn-sm">
-                        Logout
-                    </a>
-                <?php else: ?>
-                    <a href="<?php echo e(route('login')); ?>" class="btn btn-warning btn-sm">
+                    <!-- Logout harus POST -->
+                    <form action="<?php echo e(route('logout')); ?>" method="POST" class="d-inline m-0 p-0">
+                        <?php echo csrf_field(); ?>
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            Logout
+                        </button>
+                    </form>
+                <?php endif; ?>
+                <?php if(auth()->guard()->guest()): ?>
+                    <a href="<?php echo e(route('login')); ?>" class="btn btn-warning btn-sm me-2">
                         Login
+                    </a>
+                    <a href="<?php echo e(route('register')); ?>" class="btn btn-outline-light btn-sm">
+                        Register
                     </a>
                 <?php endif; ?>
 

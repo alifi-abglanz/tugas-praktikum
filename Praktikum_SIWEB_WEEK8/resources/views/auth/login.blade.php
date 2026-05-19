@@ -2,6 +2,12 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    @if (session('error'))
+        <div class="mb-4 rounded-md border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
@@ -32,7 +38,7 @@
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        <div class="flex items-center justify-between mt-4 gap-2">
             @if (Route::has('password.request'))
                 <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}
@@ -42,6 +48,20 @@
             <x-primary-button class="ms-3">
                 {{ __('Log in') }}
             </x-primary-button>
+        </div>
+
+        <div class="mt-6">
+            <div class="flex items-center my-6">
+                <div class="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+                <span class="px-4 text-sm text-gray-500 dark:text-gray-400">atau masuk dengan</span>
+                <div class="flex-grow border-t border-gray-300 dark:border-gray-700"></div>
+            </div>
+
+            <div class="flex items-center justify-center">
+                <a href="{{ url('/auth/google/redirect') }}" class="w-full inline-flex justify-center items-center px-4 py-2 bg-white text-sm font-semibold text-gray-700 border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
+                    Login dengan Google
+                </a>
+            </div>
         </div>
     </form>
 </x-guest-layout>

@@ -12,12 +12,14 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Http;
 
 class RegisteredUserController extends Controller
 {
     /**
-     * Display the registration view.
+     * 
      */
+
     public function create(): View
     {
         return view('auth.register');
@@ -30,9 +32,24 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // 1. Kirim request verifikasi reCAPTCHA ke Google
+        $response = Http::asForm()
+            ->post('https://www.google.com/recaptcha/api/siteverify', [
+                'secret' => env('RECAPTCHA_SECRET_KEY'),
+                'response' => $request->input('g-recaptcha-response'),
+                'remoteip' => $request->ip(),
+            ]);
+
+        $responseData = $response->json();
+
+        // 2. Cek apakah hasil dari bot atau manusia
+        if (!$response->successful() || !$responseData['success']) {
+            return back()->withErrors(['g-recaptcha-response' => 'Validasi reCAPTCHA gagal! Anda robot?'])->withInput();
+        }
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 

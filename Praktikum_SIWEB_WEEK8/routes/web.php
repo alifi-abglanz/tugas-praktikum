@@ -1,12 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('index');
 })->name('home');
+
+Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])
+    ->name('google.redirect');
+Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])
+    ->name('google.callback');
 
 Route::middleware(['auth'])->group(function () {
 
